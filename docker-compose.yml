@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  pulseguard:
+    build: .
+    container_name: pulseguard
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite:///./pulseguard.db
+      - DEFAULT_CHECK_INTERVAL=30
+      - REQUEST_TIMEOUT=10
+    volumes:
+      - pulseguard-data:/app
+    restart: unless-stopped
+
+volumes:
+  pulseguard-data:
